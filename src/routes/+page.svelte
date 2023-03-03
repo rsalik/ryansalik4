@@ -10,7 +10,7 @@
 
 	setTimeout(() => {
 		show = true;
-	}, 200);
+	}, 500);
 </script>
 
 <svelte:window
@@ -22,8 +22,8 @@
 {#if show}
 	<section class="home">
 		<div class="header">
-			<div class="title" in:fade={{ duration: 300 }}>Ryan Salik</div>
-			<div class="subtitle" in:fade={{ duration: 300, delay: 300 }}>Student</div>
+			<div class="title" in:fade={{ duration: 400 }}>Ryan Salik</div>
+			<div class="subtitle" in:fade={{ duration: 300, delay: 400 }}>Student</div>
 		</div>
 
 		{#if !hasScrolled}
