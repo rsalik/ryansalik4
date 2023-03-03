@@ -1,0 +1,15 @@
+$color: #fff;
+$gray: #484848;
+$accent: #ff7030;
+
+$bkg: #1a1a1a;
+
+$mobile: 768px;
+
+%border-radius {
+	border-radius: 5px;
+
+	@media screen and (max-width: $mobile) {
+		border-radius: 2.5px;
+	}
+}
