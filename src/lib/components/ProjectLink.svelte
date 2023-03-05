@@ -36,7 +36,6 @@
 			on:focusout={() => (hover = false)}
 			on:mouseover={() => (hover = true)}
 			on:mouseleave={() => {
-				console.log('Ee');
 				forceMouseLeave = false;
 				hover = false;
 			}}

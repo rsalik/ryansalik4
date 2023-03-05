@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onDestroy, onMount } from 'svelte';
-	import { get } from 'svelte/store';
 
 	import Project from '$lib/components/Project.svelte';
 	import projects from '$lib/projects.json';
@@ -9,6 +8,8 @@
 	const amountShown = 7;
 
 	let activeProjs: (typeof projects)[0][] = projects.slice(0, 4);
+
+	let w = 0;
 
 	let i = 0;
 	let left = -150;
@@ -22,7 +23,7 @@
 	let refs = [] as HTMLDivElement[];
 
 	function updateCarousel() {
-		if (!hover) left -= 1;
+		if (!hover) left -= w / 1200;
 	}
 
 	function onLeftChange() {
@@ -70,7 +71,7 @@
 				touchStartX = e.touches[0].clientX;
 			}
 
-			left = touchStartLeft + (e.touches[0].clientX - touchStartX) * 1.2;
+			left = touchStartLeft + (e.touches[0].clientX - touchStartX) * 1.5;
 		}
 
 		if (e instanceof MouseEvent) {
@@ -96,6 +97,7 @@
 	}}
 	on:mousemove={handleDrag}
 	on:touchmove={handleDrag}
+	bind:innerWidth={w}
 />
 
 <div
