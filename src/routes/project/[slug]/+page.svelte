@@ -15,6 +15,14 @@
 	}
 </script>
 
+<svelte:head>
+	{#if project === undefined}
+		<title>Ryan Salik - 404: Not Found</title>
+	{:else}
+		<title>Ryan Salik - {project.name}</title>
+	{/if}
+</svelte:head>
+
 {#if project === undefined}
 	<h1 class="mono">404: Not Found</h1>
 {:else}
@@ -30,16 +38,13 @@
 				<div class="nav">
 					{#if prev !== undefined}
 						<ProjectLink project={prev}>
-							<a class="btn" href="/project/{prev.id}">
-								<div><IconPrev /></div>
-							</a>
+							<div class="btn"><div><IconPrev /></div></div>
 						</ProjectLink>
 					{/if}
+                    <div style:width=".5rem"></div>
 					{#if next !== undefined}
 						<ProjectLink project={next}>
-							<a class="btn" href="/project/{next.id}">
-								<div><IconNext /></div>
-							</a>
+							<div class="btn"><div><IconNext /></div></div>
 						</ProjectLink>
 					{/if}
 				</div>
@@ -73,6 +78,12 @@
 
 	.wrapper {
 		display: flex;
+
+		@media screen and (max-width: $mobile) {
+			flex-direction: column-reverse;
+
+			padding: 0 2rem;
+		}
 	}
 
 	.text {
@@ -82,13 +93,21 @@
 	.name {
 		font-size: 2em;
 
-		margin-bottom: 0.1rem;
+		margin-bottom: 0.3rem;
+
+		@media screen and (max-width: $mobile) {
+			font-size: 2.8em;
+		}
 	}
 
 	.desc {
 		font-size: 0.8em;
 
 		margin-top: 0.5rem;
+
+		@media screen and (max-width: $mobile) {
+			font-size: 1em;
+		}
 	}
 
 	.btns {
@@ -123,7 +142,6 @@
 			border: 1px solid $color;
 
 			@extend %border-radius;
-			$muted-accent: mix($accent, white, 70%);
 			$disabled: repeating-linear-gradient(
 			-45deg,
 			$disabled-color,
@@ -142,10 +160,10 @@
 			}
 
 			&.web {
-				margin-left: 1em;
+				margin-left: 0.5em;
 
-				color: $muted-accent;
-				border-color: $muted-accent;
+				color: $accent;
+				border-color: $accent;
 
 				@media screen and (max-width: $mobile) {
 					margin-top: 0.5em;
@@ -154,7 +172,6 @@
 
 				&:hover {
 					color: $bkg;
-					border-color: $accent;
 					background: $accent;
 				}
 			}
@@ -181,6 +198,10 @@
 			margin-top: 1em;
 
 			color: rgb(255, 77, 77);
+
+			@media screen and (max-width: $mobile) {
+				font-size: 0.8em;
+			}
 		}
 	}
 
@@ -195,7 +216,8 @@
 
 			width: 1.5em;
 			height: 1.5em;
-			margin-right: 0.5em;
+
+			transition: all 0.2s ease-in-out;
 
 			color: $accent;
 			border: 0.1em solid $accent;
@@ -207,8 +229,7 @@
 			}
 
 			@media screen and (max-width: $mobile) {
-				width: 2em;
-				height: 2em;
+				font-size: 1.5em;
 			}
 
 			&:hover {
@@ -222,6 +243,13 @@
 		width: 40vw;
 		height: auto;
 
+		box-shadow: 0 0 0.5rem #0008;
+
 		@extend %border-radius;
+
+		@media screen and (max-width: $mobile) {
+			width: 100%;
+			margin-bottom: 1.5em;
+		}
 	}
 </style>

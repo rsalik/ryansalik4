@@ -1,12 +1,17 @@
 <script lang="ts">
 	import type projects from '$lib/projects.json';
 
-	export let project: typeof projects[0];
+	export let project: (typeof projects)[0];
 
 	export let disableShadowTransition = false;
 </script>
 
-<a href="/project/{project.id}" class="project" class:no-transition={disableShadowTransition}>
+<a
+	href="/project/{project.id}"
+	class="project"
+	draggable={false}
+	class:no-transition={disableShadowTransition}
+>
 	<div class="img" style="--url: url('{project.image}')" />
 	<div class="name mono">{project.name}</div>
 

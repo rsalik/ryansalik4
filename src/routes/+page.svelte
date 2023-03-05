@@ -1,10 +1,7 @@
 <script lang="ts">
 	import Waves from '$lib/components/Waves.svelte';
 	import Fade from '$lib/components/Fade.svelte';
-	import projects from '$lib/projects.json';
 	import { bkg } from '$lib/stores';
-
-	import Saos from 'saos';
 
 	import { fade } from 'svelte/transition';
 	import { onMount } from 'svelte';

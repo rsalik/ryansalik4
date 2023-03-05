@@ -1,12 +1,13 @@
 $color: #fff;
-$gray: #484848;
+$gray: #242424;
 $accent: #ff7030;
 
 $bkg: #1a1a1a;
 
 $header-height: 3.2rem;
 
-$mobile: 768px;
+$mobile-num: 768;
+$mobile: #{$mobile-num}px;
 
 %border-radius {
 	border-radius: 10px;

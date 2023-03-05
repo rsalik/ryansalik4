@@ -4,6 +4,7 @@
 :root {
 	--bkg: #{$bkg};
 	--accent: #{$accent};
+	--mobile: #{$mobile-num};
 }
 
 html,
@@ -89,6 +90,14 @@ footer {
 		margin-left: 0.25em;
 
 		letter-spacing: normal;
+
+		@media screen and (max-width: $mobile) {
+			display: none;
+		}
+	}
+
+	@media screen and (max-width: $mobile) {
+		font-size: 2em;
 	}
 }
 

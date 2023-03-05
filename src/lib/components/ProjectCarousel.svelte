@@ -8,7 +8,7 @@
 	// Make TypeScript happy
 	const amountShown = 7;
 
-	let activeProjs: (typeof projects[0])[] = projects.slice(0, 4);
+	let activeProjs: (typeof projects)[0][] = projects.slice(0, 4);
 
 	let i = 0;
 	let left = -150;
@@ -43,7 +43,7 @@
 			i = (((i - 1) % projects.length) + projects.length) % projects.length;
 		}
 
-		// Ensure that if elements are shifted and the user is dragging, the drag 
+		// Ensure that if elements are shifted and the user is dragging, the drag
 		// does not cause the carousel to revert to its pre-shifted position.
 		touchStartLeft = left;
 		touchStartX = -1;
@@ -53,7 +53,9 @@
 		if (i < projects.length - amountShown) {
 			activeProjs = projects.slice(i, i + amountShown);
 		} else {
-			activeProjs = projects.slice(i).concat(projects.slice(0, amountShown - (projects.length - i)));
+			activeProjs = projects
+				.slice(i)
+				.concat(projects.slice(0, amountShown - (projects.length - i)));
 		}
 	}
 
@@ -68,7 +70,7 @@
 				touchStartX = e.touches[0].clientX;
 			}
 
-			left = touchStartLeft + (e.touches[0].clientX - touchStartX);
+			left = touchStartLeft + (e.touches[0].clientX - touchStartX) * 1.2;
 		}
 
 		if (e instanceof MouseEvent) {

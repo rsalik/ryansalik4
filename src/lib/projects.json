@@ -19,7 +19,7 @@
 		"id": "concurrently",
 		"name": "The Concurrently",
 		"image": "/imgs/concurrently.jpg",
-		"description": "Though I'm not a blogger, I made this website to learn more about Svelte and generating webpages from markdown files. Hosted by Vercel.",
+		"description": "An example on how to make a blog with Svelte, generating webpages from markdown files. Hosted by Vercel.",
 		"webLink": "https://concurrently.ryansalik.com",
 		"repoLink": "https://www.github.com/rsalik/concurrently-blog"
 	},
@@ -50,7 +50,7 @@
 	{
 		"id": "ryansalikcom",
 		"name": "ryansalik.com",
-		"image": "/imgs/ryansalik.jpg",
+		"image": "/imgs/ryansalik.png",
 		"description": "The website you're on right now! Written with SvelteKit. Hosted by Vercel.",
 		"repoLink": "https://github.com/rsalik/ryansalik.com",
 		"webLink": "https://ryansalik.com"
