@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onDestroy, onMount } from 'svelte';
 	import { createNoise2D } from 'simplex-noise';
 	import { lerpColor } from '$lib/util';
 	import { accent } from '$lib/stores';
@@ -9,13 +9,13 @@
 
 	let canvas: HTMLCanvasElement;
 	let w = 1,
-		h = 1;
+		h = 300;
 
 	let iw = 1,
 		ih = 1;
 
 	export let startingHeight = 0.7;
-	export let color =  get(accent);
+	export let color = get(accent);
 	export let inverse = false;
 
 	const resScale = 2;
@@ -26,10 +26,6 @@
 	}
 
 	let t = 0;
-
-	onMount(() => {
-		draw();
-	});
 
 	function n(x: number, y: number) {
 		return simplex(x / 450, y / 450);
@@ -49,10 +45,9 @@
 		drawWave(ctx, color, startingHeight, 80);
 		drawWave(ctx, inverse ? colorUp : colorDown, startingHeight + 0.05, 60, 2.5, 100);
 
-		setTimeout(() => {
-			t += 1;
-			draw();
-		}, 10);
+		t += 1;
+
+		requestAnimationFrame(draw);
 	}
 
 	function drawWave(
@@ -80,6 +75,10 @@
 		ctx.fillStyle = color;
 		ctx.fill();
 	}
+
+	onMount(() => {
+		requestAnimationFrame(draw);
+	});
 </script>
 
 <svelte:window bind:innerHeight={ih} bind:innerWidth={iw} />
