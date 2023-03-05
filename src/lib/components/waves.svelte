@@ -2,6 +2,8 @@
 	import { onMount } from 'svelte';
 	import { createNoise2D } from 'simplex-noise';
 	import { lerpColor } from '$lib/util';
+	import { accent } from '$lib/stores';
+	import { get } from 'svelte/store';
 
 	const simplex = createNoise2D();
 
@@ -13,7 +15,8 @@
 		ih = 1;
 
 	export let startingHeight = 0.7;
-    export let color = '#ff7030';
+	export let color =  get(accent);
+	export let inverse = false;
 
 	const resScale = 2;
 
@@ -39,9 +42,12 @@
 
 		ctx.clearRect(0, 0, w, h);
 
-		drawWave(ctx, lerpColor(color, '#000000', .35), startingHeight - 0.05, 100, 0.5, -100);
+		let colorUp = lerpColor(color, '#000000', 0.35),
+			colorDown = lerpColor(color, '#ffffff', 0.15);
+
+		drawWave(ctx, inverse ? colorDown : colorUp, startingHeight - 0.05, 100, 0.5, -100);
 		drawWave(ctx, color, startingHeight, 80);
-		drawWave(ctx, lerpColor(color, '#ffffff', .15), startingHeight + 0.05, 60, 2.5, 100);
+		drawWave(ctx, inverse ? colorUp : colorDown, startingHeight + 0.05, 60, 2.5, 100);
 
 		setTimeout(() => {
 			t += 1;
@@ -83,7 +89,7 @@
 <style lang="scss">
 	canvas {
 		position: absolute;
-		top: 0;
+		bottom: 0;
 		left: 0;
 
 		width: 100vw;

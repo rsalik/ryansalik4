@@ -4,12 +4,10 @@ $accent: #ff7030;
 
 $bkg: #1a1a1a;
 
+$header-height: 3.2rem;
+
 $mobile: 768px;
 
 %border-radius {
-	border-radius: 5px;
-
-	@media screen and (max-width: $mobile) {
-		border-radius: 2.5px;
-	}
+	border-radius: 10px;
 }

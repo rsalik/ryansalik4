@@ -1,10 +1,18 @@
 @use '_values' as *;
 
+// To allow js to access color variables
+:root {
+	--bkg: #{$bkg};
+	--accent: #{$accent};
+}
+
 html,
 body {
-	font-size: 32px;
+	font-size: min(32px, 2.5vw);
 
 	position: relative;
+
+	overflow-x: hidden;
 
 	min-height: 100vh;
 	margin: 0;
@@ -51,6 +59,36 @@ section {
 
 	@media screen and (max-width: $mobile) {
 		padding: 2em 0.5em;
+	}
+}
+
+header,
+footer {
+	font-size: 1.5em;
+	font-weight: bold;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+
+	box-sizing: border-box;
+	height: $header-height;
+	padding: 0 1rem;
+
+	letter-spacing: -0.03em;
+
+	background: #000;
+
+	a {
+		text-decoration: none;
+	}
+
+	span {
+		font-weight: normal;
+
+		margin-left: 0.25em;
+
+		letter-spacing: normal;
 	}
 }
 

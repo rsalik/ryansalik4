@@ -1,54 +1,74 @@
-<script>
-	import Waves from '$lib/components/waves.svelte';
+<script lang="ts">
+	import Waves from '$lib/components/Waves.svelte';
+	import Fade from '$lib/components/Fade.svelte';
+	import projects from '$lib/projects.json';
+	import { bkg } from '$lib/stores';
 
 	import Saos from 'saos';
 
 	import { fade } from 'svelte/transition';
+	import { onMount } from 'svelte';
+	import ProjectCarousel from '$lib/components/ProjectCarousel.svelte';
 
 	let show = false;
-	let hasScrolled = false;
+	let showProjContent = false;
 
-	setTimeout(() => {
+	onMount(() => {
 		show = true;
-	}, 500);
+	});
 </script>
 
 <svelte:window
 	on:scroll={() => {
-		hasScrolled = true;
+		/* The Projects title is technically on screen when the window
+		 * is unscrolled and since the fade-out animation will play on page load,
+		 * it is visible for a moment. This hack avoids that */
+		if (window.scrollY > window.innerHeight * 0.07) {
+			showProjContent = true;
+		}
 	}}
 />
 
 {#if show}
 	<section class="home">
 		<div class="header">
-			<div class="title" in:fade={{ duration: 400 }}>Ryan Salik</div>
-			<div class="subtitle" in:fade={{ duration: 300, delay: 400 }}>Student</div>
+			<div class="title" in:fade={{ duration: 600, delay: 200 }}>Ryan Salik</div>
+			<div class="subtitle" in:fade={{ duration: 300, delay: 600 }}>Programmer</div>
 		</div>
-
-		{#if !hasScrolled}
-			<div class="scroll nib" out:fade={{ duration: 300 }}><i>Scroll Down</i></div>
-		{/if}
 
 		<Waves />
 	</section>
 
-	<section class="main">
-		<Saos animation="fade-in .7s linear both">
+	<section class="sec-projects">
+		{#if showProjContent}
+			<Fade>
+				<div class="section-title nib">Projects</div>
+			</Fade>
+
+			<div in:fade={{ duration: 600 }} style:z-index={100}>
+				<ProjectCarousel />
+			</div>
+		{/if}
+
+		<Waves color={$bkg} startingHeight={0.85} inverse />
+	</section>
+
+	<section class="contact">
+		<Fade>
 			<div class="section-title nib">Contact</div>
-		</Saos>
+		</Fade>
 
 		<div class="links">
-			<Saos animation="fade-in .7s linear both">
+			<Fade>
 				Email: <a href="mailto:rssalik14@gmail.com" class="mono">rssalik14@gmail.com</a>
-			</Saos>
+			</Fade>
 
-			<Saos animation="fade-in .7s linear both">
+			<Fade>
 				GitHub: <a href="https://github.com/rsalik" class="mono">rsalik</a>
-			</Saos>
+			</Fade>
 		</div>
 
-		<Waves color="#1a1a1a" startingHeight={0.85} />
+		<footer>ryansalik.com</footer>
 	</section>
 {/if}
 
@@ -84,23 +104,16 @@
 		}
 	}
 
-	.scroll {
-		font-size: 0.3em;
+	.sec-projects {
+		margin-top: -5vh;
+		padding-top: 0;
 
-		position: absolute;
-		z-index: 100;
-		right: 0;
-		bottom: 0.5em;
-		left: 0;
-
-		text-align: center;
-
-		color: $bkg;
-	}
-
-	.main {
 		color: $bkg;
 		background: linear-gradient(to bottom, mix($accent, #fff, 85%), $accent);
+	}
+
+	.contact {
+		background: mix($bkg, #000, 60%);
 
 		.links {
 			z-index: 100;
@@ -110,14 +123,16 @@
 				padding: 0 2em;
 			}
 		}
-	}
 
-	@keyframes -global-fade-in {
-		0% {
-			opacity: 0;
-		}
-		100% {
-			opacity: 1;
+		footer {
+			position: absolute;
+			right: 0;
+			bottom: 0;
+			left: 0;
+
+			@media screen and (max-width: $mobile) {
+				display: none;
+			}
 		}
 	}
 </style>
