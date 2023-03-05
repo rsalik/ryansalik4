@@ -26,6 +26,10 @@
 	}}
 />
 
+<svelte:head>
+	<title>Ryan Salik</title>
+</svelte:head>
+
 {#if show}
 	<section class="home">
 		<div class="header">
