@@ -46,7 +46,7 @@
 				<div class="section-title nib">Projects</div>
 			</Fade>
 
-			<div in:fade={{ duration: 600 }} style:z-index={100}>
+			<div in:fade={{ duration: 600 }} class="carousel-wrapper">
 				<ProjectCarousel />
 			</div>
 		{/if}
@@ -106,11 +106,19 @@
 	}
 
 	.sec-projects {
+		height: auto;
+		min-height: 100vh;
 		margin-top: -5vh;
 		padding-top: 0;
 
 		color: $bkg;
 		background: linear-gradient(to bottom, mix($accent, #fff, 85%), $accent);
+
+		.carousel-wrapper {
+			z-index: 100;
+
+			margin-bottom: 2rem;
+		}
 	}
 
 	.contact {
