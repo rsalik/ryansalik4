@@ -107,17 +107,19 @@
 
 	.sec-projects {
 		height: auto;
-		min-height: 100vh;
+		min-height: max(100vh, 28em);
 		margin-top: -5vh;
 		padding-top: 0;
 
 		color: $bkg;
 		background: linear-gradient(to bottom, mix($accent, #fff, 85%), $accent);
 
+		@media screen and (max-width: $mobile) {
+			min-height: max(100vh, 50em);
+		}
+
 		.carousel-wrapper {
 			z-index: 100;
-
-			margin-bottom: 2rem;
 		}
 	}
 
